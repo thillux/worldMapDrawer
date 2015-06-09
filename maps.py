@@ -7,6 +7,8 @@ import matplotlib.colors
 
 colorConverter = matplotlib.colors.ColorConverter()
 
+oceanColor = colorConverter.to_rgba("#FFFFFF", 1.0)
+
 outlineFillColor = colorConverter.to_rgba("#989898", 0.3)
 outlineStrokeColor = colorConverter.to_rgba("#0E94EC", 1.0)
 
@@ -143,11 +145,15 @@ def drawPolygon(ctx, poly):
         ctx.stroke()
 
 if __name__ == "__main__":
+    #surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, width, height)
     surface = cairo.PDFSurface(outFile, width, height)
     ctx = cairo.Context(surface)
 
-    ctx.set_source_rgb(0, 0, 0)
-    ctx.set_line_width(0.1)
+    ctx.set_line_width(0.5)
+
+    ctx.set_source_rgba(oceanColor[0], oceanColor[1], oceanColor[2], oceanColor[3])
+    ctx.rectangle(0, 0, width, height)
+    ctx.fill()
 
     # source: https://github.com/LonnyGomes/CountryGeoJSONCollection
     countryFile = "countries.geojson"
@@ -168,3 +174,5 @@ if __name__ == "__main__":
         ctx.fill_preserve()
         ctx.set_source_rgba(nodeStrokeColor[0], nodeStrokeColor[1], nodeStrokeColor[2], nodeStrokeColor[3])
         ctx.stroke()
+
+    #surface.write_to_png("world.png")
