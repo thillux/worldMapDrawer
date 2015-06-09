@@ -155,7 +155,6 @@ if __name__ == "__main__":
     ctx.rectangle(0, 0, width, height)
     ctx.fill()
 
-    # source: https://github.com/LonnyGomes/CountryGeoJSONCollection
     countryFile = "countries.geojson"
     countryGeoJSON = json.load(open(countryFile))
     for feature in countryGeoJSON["features"]:
